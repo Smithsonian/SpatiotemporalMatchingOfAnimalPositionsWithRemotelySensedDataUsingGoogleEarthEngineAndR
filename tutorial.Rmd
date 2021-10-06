@@ -21,8 +21,11 @@ knit: (function(input_file, encoding) {
 ---
 
 a - Smithsonian National Zoo and Conservation Biology Institute, Conservation Ecology Center, 1500 Remount Rd, Front Royal, VA 22630, USA.
-b - Working Land and Seascapes, Conservation Commons, Smithsonian Institution, Washington, DC 20013, USA
+
+b - Working Land and Seascapes, Conservation Commons, Smithsonian Institution, Washington, DC 20013, USA.
+
 c - Boyd Orr Centre for Population and Ecosystem Health, Institute of Biodiversity, Animal Health & Comparative Medicine (IBAHCM), University of Glasgow, G12 8QQ, UK.
+
 
 ***
 
