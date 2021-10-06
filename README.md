@@ -1,4 +1,4 @@
-# Extraction-of-spatiotemporal-information-from-remotely-sensed-data-using-Google-Earth-Engine-and-R-
+# Extraction of spatiotemporal information from remotely sensed data using Google Earth Engine and R
 
 Ramiro D. Crego 1,2, Majaliwa M. Masolele 3, Grant Connette 1,2 and Jared A. Stabach 1
 
@@ -12,3 +12,4 @@ Ramiro D. Crego 1,2, Majaliwa M. Masolele 3, Grant Connette 1,2 and Jared A. Sta
 The tutorial to use the code to fit species distribution models in Google Earth Engine is available at: 
 
 The file CaseStudy2_RCode.R contains the code to replicate case study 2.
+
