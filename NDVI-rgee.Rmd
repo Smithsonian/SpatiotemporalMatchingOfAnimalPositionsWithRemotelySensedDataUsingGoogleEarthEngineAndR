@@ -1,10 +1,9 @@
 ---
-title: Enhancing animal movement analyses: Extraction of spatio-temporal information from remotely sensed data using Google Earth Engine and R   
+title: Extraction of spatio-temporal information from remotely sensed data using Google Earth Engine and R   
 author: Ramiro D. Crego ^a,b^, Majaliwa M. Masolele ^c^, Grant Connette ^a,b^, and
   Jared A. Stabach ^a^
 date: "`r Sys.Date()`"
 output:
-  word_document: default
   html_document: default
 ---
 
@@ -14,7 +13,9 @@ c - Boyd Orr Centre for Population and Ecosystem Health, Institute of Biodiversi
 
 ***
 
-The following code workflow allows you to find the closest image from an image collection to the time at which each GPS location was acquired and extract the pixel value. 
+The following tutorial describes the code workflow presented in the manuscript "Enhancing animal movement analyses: Extraction of spatio-temporal information from remotely sensed data using Google Earth Engine and R." 
+
+The code workflow allows you to find the closest image from an image collection to the time at which each GPS location was acquired and extract the pixel value. 
 
 To use this code it is necessary to have a [Google Earth Engine](https://earthengine.google.com/) account and to install the `rgee` [package](https://r-spatial.github.io/rgee/#quick-start-users-guide-for-rgee).
 
@@ -23,6 +24,7 @@ To use this code it is necessary to have a [Google Earth Engine](https://earthen
 The first step is to read a csv file with the telemetry data. 
 
 For this example we randomly selected 100 GPS fixes from the entire wildebeest dataset used in the manuscript, obtained from [Movebank](https://www.datarepository.movebank.org/handle/10255/move.1098).
+The data is provided in the repository within the folder Data.
 
 ```{r, message=FALSE}
 library(sf)
@@ -31,7 +33,7 @@ trackingdata <- read.csv("./Data/Data.csv", header = T) #Load your dataset
 head(trackingdata)
 ```
 
-In the next stpe, we need to convert the dataframe into an sf object. We also need to set the date as a string with a ‘YYYY-MM-DDTHH:MM:SS’. We will use this data to convert it into milliseconds since midnight on January 1, 1970, a format used in Google Earth Engine to manage dates.
+In the next step, we need to convert the dataframe into an sf object. We also need to set the date as a string with a ‘YYYY-MM-DDTHH:MM:SS’. We will use this data to convert it into milliseconds since midnight on January 1, 1970, a format used in Google Earth Engine to manage dates.
 
 ```{r}
 trackingdata$Date <- as.POSIXct(trackingdata$timestamp, format = "%Y-%m-%d %H:%M:%S", tz="UTC") #Modify as necessary
@@ -117,9 +119,13 @@ removeProperty<- function(feature) {
 In this example, we are using NDVI from MODIS Terra Vegetation Indexes 16-Day Global 250m data set. 
 However, you can use any other remote sensing product of interest and filter to the desired dates.
 
-We will set the start and end days to filter the image collections.
+One of the main advntages offered by Google Earth Engine is the enormous amount of data available to be used. The constantly growing database consists on more than a petabyte archive of publicly available remotely sensed imagery and other related data sets. In the study cases of the manuscript we used MOD13Q1 and ERA5_LAND/HOURLY, but data available includes other products from MODIS, data from other satellites such as Landsat, National Oceanographic and Atmospheric Administration Advanced Very High Resolution Radiometer (NOAA AVHRR), Sentinel 1, 2, 3 and 5-P, Advanced Land Observing Satellite (ALOS), and other products such as sea surface temperature data, CHIRPS climate data, topography data, and land cover data. The entire list of datasets is available at this [link](https://developers.google.com/earth-engine/datasets/catalog). 
 
-We will also create an object with the name of the band we are interested in working with.
+Note that all image collections in Earth Engine have a code that you can extract from the link provided above and use to import into the workflow by modifying this example. 
+
+We will set the start and end days to filter the image collections. Temporal availability depends on each dataset.
+
+We will also create an object with the name of the band we are interested in working with. The name of the band is also specific to each image collection.
 
 ```{r}
 start<-"2010-01-01"
