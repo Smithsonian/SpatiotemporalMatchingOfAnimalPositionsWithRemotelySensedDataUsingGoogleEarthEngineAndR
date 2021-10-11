@@ -1,5 +1,5 @@
 ---
-title: Extraction of spatio-temporal information from remotely sensed data using Google Earth Engine and R   
+title: Enhancing animal movement analyses - Spatiotemporal matching of animal positions with remotely sensed data using Google Earth Engine and R    
 author: Ramiro D. Crego ^a,b^, Majaliwa M. Masolele ^c^, Grant Connette ^a,b^, and
   Jared A. Stabach ^a^
 date: "`r Sys.Date()`"
@@ -29,7 +29,7 @@ c - Boyd Orr Centre for Population and Ecosystem Health, Institute of Biodiversi
 
 ***
 
-The following tutorial describes the code workflow presented in the manuscript "Enhancing animal movement analyses: Extraction of spatio-temporal information from remotely sensed data using Google Earth Engine and R." 
+The following tutorial describes the code workflow presented in the manuscript "Enhancing animal movement analyses - Spatiotemporal matching of animal positions with remotely sensed data using Google Earth Engine and R." 
 
 The code workflow allows you to find the closest image from an image collection to the time at which each GPS location was acquired and extract the pixel value. 
 
