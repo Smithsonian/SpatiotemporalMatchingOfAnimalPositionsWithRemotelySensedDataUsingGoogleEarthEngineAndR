@@ -1,4 +1,5 @@
-# Extraction of spatiotemporal information from remotely sensed data using Google Earth Engine and R
+# Enhancing Animal Movement Analyses: Spatiotemporal Matching of Animal Positions with Remotely Sensed Data 
+Using Google Earth Engine and R
 
 Ramiro D. Crego 1,2, Majaliwa M. Masolele 3, Grant Connette 1,2 and Jared A. Stabach 1
 
