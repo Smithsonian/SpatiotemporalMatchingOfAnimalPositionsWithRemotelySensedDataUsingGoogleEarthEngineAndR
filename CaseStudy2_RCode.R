@@ -184,7 +184,6 @@ head(tempwild)
 
 names(tempwild)[3] <- band
 tempwild$temperature_2m <- tempwild$temperature_2m - 273.15 # convert kelvin to celcius
-tempwild$hour <- as.integer(format(tempwild$Date, "%H")) # Add hour to filter later
 head(tempwild)
 
 #saving as csv
@@ -193,53 +192,28 @@ head(tempwild)
 tempwild <- read.csv("./wildtempdata.csv", header = T)
 head(tempwild)
 
-## Thin data to a time of the day
-
-# Night time
-tempwildnight <- subset(tempwild, hour < 9 | hour > 17)
-range(tempwildnight$hour)
-ggplot(tempwildnight, aes(x = temperature_2m, y = dist)) + facet_wrap(~id, scales = "free_y") + 
-  coord_cartesian(ylim = c(50,2000)) +
-  geom_point(alpha = 0.4) +
-  ylab("Log step distance (m)") + xlab("Temperature (C)") +
-  stat_smooth(aes(x = temperature_2m, y = dist), method = "glm", formula = y ~ x, se = T) +
-  theme_classic() +
-  theme(text = element_text(size=13), legend.position = c(0.8, 0.83)) 
-
-# Day time
-tempwildday <- subset(tempwild, hour > 8 & hour < 18)
-range(tempwildday$hour)
-ggplot(tempwildday, aes(x = temperature_2m, y = dist)) + facet_wrap(~id, scales = "free_y") +   
-  coord_cartesian(ylim = c(0,2500)) +
-  geom_point(alpha = 0.4) +
-  ylab("Step distance (m)") + xlab("Temperature (C)") +
-  stat_smooth(aes(x = temperature_2m, y = dist), method = "gam", formula = y ~ (x), se = T) +
-  theme_classic() +
-  theme(text = element_text(size=13), legend.position = c(0.8, 0.83)) 
-
-
 
 #####################
-## Figure Day time
-range(tempwildday$hour)
-tempwildday$id <- as.factor(tempwildday$id)
-levels(tempwildday$id)[levels(tempwildday$id) ==  "2829"] <- "Mara-1"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "2832"] <- "Mara-2"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "2836"] <- "Mara-3"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "2844"] <- "Mara-4"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30069"] <- "Amboseli-1"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30072"] <- "Athi-Kaputiei-1"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30075"] <- "Amboseli-2"  
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30077"] <- "Athi-Kaputiei-2"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30082"] <- "Athi-Kaputiei-3"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30086"] <- "Athi-Kaputiei-4"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30076"] <- "Amboseli-3"
-levels(tempwildday$id)[levels(tempwildday$id) ==  "30085"] <- "Amboseli-4"
+## Figure 3
+
+tempwild$id <- as.factor(tempwild$id)
+levels(tempwild$id)[levels(tempwild$id) ==  "2829"] <- "Mara-1"
+levels(tempwild$id)[levels(tempwild$id) ==  "2832"] <- "Mara-2"
+levels(tempwild$id)[levels(tempwild$id) ==  "2836"] <- "Mara-3"
+levels(tempwild$id)[levels(tempwild$id) ==  "2844"] <- "Mara-4"
+levels(tempwild$id)[levels(tempwild$id) ==  "30069"] <- "Amboseli-1"
+levels(tempwild$id)[levels(tempwild$id) ==  "30072"] <- "Athi-Kaputiei-1"
+levels(tempwild$id)[levels(tempwild$id) ==  "30075"] <- "Amboseli-2"  
+levels(tempwild$id)[levels(tempwild$id) ==  "30077"] <- "Athi-Kaputiei-2"
+levels(tempwild$id)[levels(tempwild$id) ==  "30082"] <- "Athi-Kaputiei-3"
+levels(tempwild$id)[levels(tempwild$id) ==  "30086"] <- "Athi-Kaputiei-4"
+levels(tempwild$id)[levels(tempwild$id) ==  "30076"] <- "Amboseli-3"
+levels(tempwild$id)[levels(tempwild$id) ==  "30085"] <- "Amboseli-4"
 
 #Change order of levels
-tempwildday$id <- factor(tempwildday$id, levels = c('Mara-1', 'Mara-2', 'Mara-3', 'Mara-4', 'Athi-Kaputiei-1', 'Athi-Kaputiei-2', 'Athi-Kaputiei-3', 'Athi-Kaputiei-4', 'Amboseli-1', 'Amboseli-2', 'Amboseli-3', 'Amboseli-4'))
+tempwild$id <- factor(tempwild$id, levels = c('Mara-1', 'Mara-2', 'Mara-3', 'Mara-4', 'Athi-Kaputiei-1', 'Athi-Kaputiei-2', 'Athi-Kaputiei-3', 'Athi-Kaputiei-4', 'Amboseli-1', 'Amboseli-2', 'Amboseli-3', 'Amboseli-4'))
 
-g <- ggplot(tempwildday, aes(x = Temp, y = dist)) + facet_wrap(~id, scales = "free_y") +   
+g <- ggplot(tempwild, aes(x = Temp, y = dist)) + facet_wrap(~id, scales = "free_y") +   
   coord_cartesian(ylim = c(0,2500)) +
   geom_point(alpha = 0.4, colour = "grey30") +
   ylab("Step distance (m)") + xlab("Temperature (°C)") +
@@ -253,7 +227,7 @@ g <- ggplot(tempwildday, aes(x = Temp, y = dist)) + facet_wrap(~id, scales = "fr
 g
 
 
-jpeg(filename = "Fig2.jpeg", width = 10, height = 6, units = "in", res  = 600, bg = "white")
+jpeg(filename = "Fig3.jpeg", width = 10, height = 6, units = "in", res  = 600, bg = "white")
 g
 dev.off()
 
