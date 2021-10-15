@@ -1,6 +1,7 @@
 #########################################################################################################################
 # R Code Case Study 2
-# Boosting animal movement analyses: Spatiotemporal extraction of remotely sensed data using Google Earth Engine and R   
+# Enhancing Animal Movement Analyses: Spatiotemporal Matching of Animal Positions with Remotely Sensed Data 
+# Using Google Earth Engine and R   
 # Ramiro D. Crego, Majaliwa M.  Masolele, Grant Connette, Jared A. Stabach
 #########################################################################################################################
 
