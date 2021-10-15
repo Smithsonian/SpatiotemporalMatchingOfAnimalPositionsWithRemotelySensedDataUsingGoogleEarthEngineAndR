@@ -2,5 +2,5 @@
 *.Rhistory
 *.RData
 *.Ruserdata
-*.Rmd
-*.Rproj
+tutorial.Rmd
+Extraction-of-spatiotemporal-information-from-remotely-sensed-data-using-Google-Earth-Engine-and-R-.Rproj
